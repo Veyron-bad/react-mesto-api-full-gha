@@ -1,0 +1,25 @@
+.info-tooltips__img {
+    display: block;
+    margin: 60px auto 0;
+}
+
+.info-tooltips__title {
+    text-align: center;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 29.05px;
+    margin: 32px 0 60px 0;
+}
+
+@media screen and (max-width: 500px) {
+    .info-tooltips__title {
+        font-size: 20px;
+        line-height: 24px;
+        margin: 40px 0 50px 0;
+    }
+
+    .info-tooltips__img {
+        margin-top: 50px;
+    }
+}

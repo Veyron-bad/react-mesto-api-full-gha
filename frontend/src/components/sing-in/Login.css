@@ -1,0 +1,76 @@
+.sign-in {
+    max-width: 358px;
+    display: flex;
+    flex-direction: column;
+    margin: 60px auto 112px;
+    height: 100vh;
+}
+
+.sign-in__title {
+    color: #fff;
+    text-align: center;
+    margin: 0 0 50px;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 29px;
+}
+
+.sign-in__input {
+    color: #ccc;
+    border: none;
+    border-bottom: 2px solid #ccc;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16.94px;
+    background: transparent;
+    padding: 0 0 10px;
+    margin-bottom: 30px;
+    box-sizing: border-box;
+}
+
+.sign-in__input:focus {
+    outline: none;
+}
+
+.sign-in__submit {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 27.78px;
+    border: none;
+    color: #000;
+    border-radius: 2px;
+    padding: 0;
+    min-height: 50px;
+    margin-top: 186px;
+    width: 100%;
+    transition: .5s;
+}
+
+.sign-in__submit:hover {
+    cursor: pointer;
+    opacity: .85;
+}
+
+@media screen and (max-width: 400px) {
+    .sign-in {
+        max-width: 260px;
+    }
+
+    .sign-in__title {
+        font-size: 20px;
+        line-height: 24px;
+    }
+
+    .sign-in__submit {
+        margin-top: 143px;
+        font-size: 16px;
+        line-height: 19px;
+    }
+
+    .sign-in__caption {
+        margin-top: 20px;
+    }
+}

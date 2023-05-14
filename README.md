@@ -4,12 +4,12 @@
   
 Пожалуйста, прикрепите в это описание ссылку на сайт, размещенный на Яндекс.Облаке.
 
-Адрес репозитория: https://github.com/...
+Адрес репозитория: https://github.com/Veyron-bad/react-mesto-api-full-gha
 
 ## Ссылки на проект
 
-IP-адрес x.x.x.x
+IP-адрес 51.250.68.243
 
-Frontend https://...
+Frontend https://api.veyronbad.danilovich.nomoredomains.monster
 
-Backend https://...
+Backend https://veyronbad.danilovichiv.nomoredomains.monster

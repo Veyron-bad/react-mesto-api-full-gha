@@ -1,0 +1,97 @@
+.sign-up {
+    max-width: 358px;
+    display: flex;
+    flex-direction: column;
+    margin: 60px auto 112px;
+    height: 100vh;
+}
+
+.sign-up__title {
+    color: #fff;
+    text-align: center;
+    margin: 0 0 50px;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 29px;
+}
+
+.sign-up__input {
+    color: #ccc;
+    border: none;
+    border-bottom: 2px solid #ccc;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16.94px;
+    background: transparent;
+    padding: 0 0 10px;
+    margin-bottom: 30px;
+    box-sizing: border-box;
+}
+
+.sign-up__input:focus {
+    outline: none;
+}
+
+.sign-up__submit {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 27.78px;
+    border: none;
+    color: #000;
+    border-radius: 2px;
+    padding: 0;
+    min-height: 50px;
+    margin-top: 186px;
+    width: 100%;
+    transition: .5s;
+}
+
+.sign-up__submit:hover {
+    cursor: pointer;
+    opacity: .85;
+}
+
+.sign-up__caption {
+    color: #fff;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16.94px;
+    text-align: center;
+    margin: 15px 0 0 0;
+}
+
+.sign-up__caption-link {
+    color: #fff;
+    text-decoration: none;
+    transition: .5s;
+}
+
+.sign-up__caption-link:hover {
+    cursor: pointer;
+    opacity: .6;
+}
+
+@media screen and (max-width: 400px) {
+    .sign-up {
+        max-width: 260px;
+    }
+
+    .sign-up__title {
+        font-size: 20px;
+        line-height: 24px;
+    }
+
+    .sign-up__submit {
+        margin-top: 143px;
+        font-size: 16px;
+        line-height: 19px;
+    }
+
+    .sign-up__caption {
+        margin-top: 20px;
+    }
+}
