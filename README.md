@@ -10,6 +10,6 @@
 
 IP-адрес 51.250.68.243
 
-Frontend https://api.veyronbad.danilovich.nomoredomains.monster
+Frontend https://veyronbad.danilovichiv.nomoredomains.monster
 
-Backend https://veyronbad.danilovichiv.nomoredomains.monster
+Backend https://api.veyronbad.danilovich.nomoredomains.monster
