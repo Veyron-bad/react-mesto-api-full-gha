@@ -67,7 +67,7 @@ class ApiAuth {
 }
 
 const apiAuth = new ApiAuth({
-    baseUrl: 'https://api.veyronbad.danilovich.nomoredomains.monster/',
+    baseUrl: 'http://localhost:3000',
     headers: {
         'Content-Type': 'application/json'
     }
