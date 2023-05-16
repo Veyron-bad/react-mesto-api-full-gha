@@ -114,7 +114,7 @@ class Api {
 }
 
 const api = new Api({
-    baseUrl: 'api.veyronbad.danilovich.nomoredomains.monster',
+    baseUrl: 'https://api.veyronbad.danilovich.nomoredomains.monster',
     headers: {
         'Content-Type': 'application/json'
     }
