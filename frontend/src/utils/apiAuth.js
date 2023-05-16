@@ -67,7 +67,7 @@ class ApiAuth {
 }
 
 const apiAuth = new ApiAuth({
-    baseUrl: 'https://api.veyronbad.danilovich.nomoredomains.monster/',
+    baseUrl: 'api.veyronbad.danilovich.nomoredomains.monster/',
     headers: {
         'Content-Type': 'application/json'
     }

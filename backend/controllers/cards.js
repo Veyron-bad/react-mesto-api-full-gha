@@ -1,9 +1,12 @@
+const { default: mongoose } = require('mongoose');
 const Card = require('../models/card');
 const { CREATED } = require('../utils/err-name');
 
 const ErrorNotFound = require('../errors/errorNotFound');
 const ErrorForbidden = require('../errors/errorForbidden');
 const ErrorBadRequest = require('../errors/errorBadRequest');
+
+const { ValidationError } = mongoose.Error;
 
 const getCards = (req, res, next) => {
   Card.find({})
@@ -21,7 +24,7 @@ const createCard = (req, res, next) => {
     .then((card) => card.populate('owner'))
     .then((card) => res.status(CREATED).send(card))
     .catch((err) => {
-      if (err.name === 'ValidationError') {
+      if (err instanceof ValidationError) {
         next(new ErrorBadRequest('Некорректные данные при создании карточки'));
       } else {
         next(err);
@@ -38,7 +41,7 @@ const deleteCard = (req, res, next) => {
         throw new ErrorNotFound('Карточка не найдена');
       }
       if (card.owner.valueOf() === req.user._id) {
-        Card.deleteOne({ _id: card._id })
+        card.deleteOne()
           .then(() => {
             res.status(200).send({ message: 'Карточка удалена' });
           })

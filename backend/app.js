@@ -17,23 +17,22 @@ const corsOptions = {
   exposedHeaders: ['set-cookie'],
 };
 
-const { PORT = 3000 } = process.env;
-
 const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
+const config = require('./config');
 const { errorLogger, requestLogger } = require('./middlewares/logger');
 const handlerError = require('./middlewares/handlerError');
 const rootRoute = require('./routes/index');
 
 const app = express();
 
+app.use(cookieParser());
+
 app.use(express.json());
 
-mongoose.connect('mongodb://127.0.0.1:27017/mestodb', {
+mongoose.connect(config.MONGO_URL, {
   useNewUrlParser: true,
 });
-
-app.use(cookieParser());
 
 app.use(requestLogger);
 
@@ -47,6 +46,6 @@ app.use(errors());
 
 app.use(handlerError);
 
-app.listen(PORT, () => {
-  console.log(`Сервер запущен на ${PORT} порту`);
+app.listen(config.PORT, () => {
+  console.log(`Сервер запущен на ${config.PORT} порту`);
 });

@@ -8,7 +8,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 51.250.68.243
+IP-адрес 51.250.68.243 username: danilovichiv
 
 Frontend https://veyronbad.danilovichiv.nomoredomains.monster
 

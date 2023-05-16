@@ -32,8 +32,8 @@ rootRoute.post('/signup', celebrate({
 rootRoute.post('/signout', logout);
 
 rootRoute.use(auth);
-rootRoute.use('/', routerUsers);
-rootRoute.use('/', routerCards);
+rootRoute.use('/users', routerUsers);
+rootRoute.use('/cards', routerCards);
 
 rootRoute.use('*', (req, res, next) => {
   next(new ErrorNotFound('Страница не найдена 404'));

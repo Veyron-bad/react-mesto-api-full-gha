@@ -1,6 +1,10 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const { default: mongoose } = require('mongoose');
 const User = require('../models/user');
+const config = require('../config');
+
+const { CastError, ValidationError } = mongoose.Error;
 
 const ErrorMongoose = require('../errors/errorMongoose');
 const ErrorBadRequest = require('../errors/errorBadRequest');
@@ -8,15 +12,12 @@ const ErrorNotFound = require('../errors/errorNotFound');
 
 const { CREATED } = require('../utils/err-name');
 
-const { NODE_ENV, JWT_SECRET } = process.env;
-console.log(NODE_ENV);
-
 const login = (req, res, next) => {
   const { email, password } = req.body;
 
   return User.findUserByCredentials(email, password)
     .then((user) => {
-      const token = jwt.sign({ _id: user._id }, NODE_ENV !== 'production' ? JWT_SECRET : 'super-strong-secret', { expiresIn: '7d' });
+      const token = jwt.sign({ _id: user._id }, config.NODE_ENV === 'production' ? config.JWT_SECRET : config.JWT_SECRET, { expiresIn: '7d' });
       res.cookie('jwt', token, {
         maxAge: 3600000 * 24 * 7,
         httpOnly: true,
@@ -44,7 +45,7 @@ const createUser = (req, res, next) => {
     .catch((err) => {
       if (err.code === 11000) {
         next(new ErrorMongoose('Пользователь с таким email уже зарегистирован'));
-      } else if (err.name === 'ValidationError') {
+      } else if (err instanceof ValidationError) {
         next(new ErrorBadRequest('Некорректные данные при создании пользователя'));
       } else {
         next(err);
@@ -98,7 +99,7 @@ const updateProfile = (req, res, next) => {
       }
     })
     .catch((err) => {
-      if (err.name === 'ValidationError') {
+      if (err instanceof ValidationError) {
         next(new ErrorBadRequest('Переданы не корректные данные пользователя'));
       } else {
         next(err);
@@ -125,7 +126,7 @@ const updateUserAvatar = (req, res, next) => {
       }
     })
     .catch((err) => {
-      if (err.name === 'ValidationError') {
+      if (err instanceof ValidationError) {
         next(new ErrorBadRequest('Переданы не корректные данные пользователя'));
       } else {
         next(err);
@@ -142,7 +143,7 @@ const getUserInfo = (req, res, next) => {
       return res.status(200).send(user);
     })
     .catch((err) => {
-      if (err.name === 'ValidationError') {
+      if (err instanceof CastError) {
         next(new ErrorBadRequest('Переданы не корректные данные пользователя'));
       } else {
         next(err);

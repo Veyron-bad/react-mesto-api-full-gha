@@ -15,6 +15,7 @@ import Login from './sing-in/Login';
 import ProtectedRouteElement from './ProtectedRoute';
 import apiAuth from '../utils/apiAuth';
 import InfoTooltip from './InfoTooltip/InfoTooltip';
+import PageNotFound from './pageNotFound/PageNotFound'
 
 function App() {
 
@@ -270,6 +271,7 @@ function App() {
       <main className="page" onKeyUp={handleEscPress} onMouseUp={closePopupByOverlay}>
         <Header loggedIn={loggedIn} userData={userData} onLogOut={handleLogOut} />
         <Routes>
+          <Route path='*' element={<PageNotFound />} />
           <Route path="/sign-up" element={<Register onRegestration={handleRegistration} />} />
           <Route path="/sign-in" element={<Login onLogin={handleLogin} />} />
           <Route path="/" element={
