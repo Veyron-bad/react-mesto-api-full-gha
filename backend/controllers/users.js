@@ -4,7 +4,7 @@ const { default: mongoose } = require('mongoose');
 const User = require('../models/user');
 const config = require('../config');
 
-const { CastError, ValidationError } = mongoose.Error;
+const { ValidationError } = mongoose.Error;
 
 const ErrorMongoose = require('../errors/errorMongoose');
 const ErrorBadRequest = require('../errors/errorBadRequest');
@@ -21,6 +21,7 @@ const login = (req, res, next) => {
       res.cookie('jwt', token, {
         maxAge: 3600000 * 24 * 7,
         httpOnly: true,
+        sameSite: true,
       });
 
       res.send({ message: 'Авторизация успешна' });
@@ -98,13 +99,7 @@ const updateProfile = (req, res, next) => {
         throw new ErrorNotFound('Пользователь не найден');
       }
     })
-    .catch((err) => {
-      if (err instanceof ValidationError) {
-        next(new ErrorBadRequest('Переданы не корректные данные пользователя'));
-      } else {
-        next(err);
-      }
-    });
+    .catch(next);
 };
 
 const updateUserAvatar = (req, res, next) => {
@@ -125,13 +120,7 @@ const updateUserAvatar = (req, res, next) => {
         throw new ErrorNotFound('Пользователь не найден');
       }
     })
-    .catch((err) => {
-      if (err instanceof ValidationError) {
-        next(new ErrorBadRequest('Переданы не корректные данные пользователя'));
-      } else {
-        next(err);
-      }
-    });
+    .catch(next);
 };
 
 const getUserInfo = (req, res, next) => {
@@ -142,13 +131,7 @@ const getUserInfo = (req, res, next) => {
       }
       return res.status(200).send(user);
     })
-    .catch((err) => {
-      if (err instanceof CastError) {
-        next(new ErrorBadRequest('Переданы не корректные данные пользователя'));
-      } else {
-        next(err);
-      }
-    });
+    .catch(next);
 };
 
 module.exports = {
