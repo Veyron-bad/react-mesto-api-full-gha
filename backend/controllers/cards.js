@@ -56,22 +56,17 @@ const deleteCard = (req, res, next) => {
 const likeCard = (req, res, next) => {
   const { cardId } = req.params;
 
-  Card.findByIdAndUpdate(
-    cardId,
-    { $addToSet: { likes: req.user._id } },
-
-    { new: true },
-  )
-    .then((card) => card.populate(['owner', 'likes']))
+  Card.findById(cardId)
     .then((card) => {
-      if (card) {
-        res.send(card);
-      } else {
-        throw new ErrorNotFound('Ошибка установки like');
+      if (!card) {
+        throw new ErrorNotFound('Карточка отсутствует');
       }
+      return Card.findByIdAndUpdate(cardId, { $addToSet: { likes: req.user._id } }, { new: true })
+        .then((newCard) => newCard.populate(['owner', 'likes']))
+        .then((newCard) => { res.send(newCard); });
     })
     .catch((err) => {
-      if (err instanceof CastError) {
+      if (err instanceof CastError ) {
         next(new ErrorNotFound('Карточка с несуществующим в БД id'));
       } else {
         next(err);
@@ -82,20 +77,22 @@ const likeCard = (req, res, next) => {
 const dislikeCard = (req, res, next) => {
   const { cardId } = req.params;
 
-  Card.findByIdAndUpdate(
-    cardId,
-    { $pull: { likes: req.user._id } },
-    { new: true },
-  )
-    .then((card) => card.populate(['owner', 'likes']))
+  Card.findById(cardId)
     .then((card) => {
-      if (card) {
-        res.send(card);
-      } else {
-        throw new ErrorNotFound('Ошибка снятия like');
+      if (!card) {
+        throw new ErrorNotFound('Карточка отсутствует');
       }
+      return Card.findByIdAndUpdate(cardId, { $pull: { likes: req.user._id } })
+        .then((newCard) => newCard.populate(['owner', 'likes']))
+        .then((newCard) => { res.send(newCard); });
     })
-    .catch(next);
+    .catch((err) => {
+      if (err instanceof CastError) {
+        next(new ErrorNotFound('Карточка с несуществующим в БД id'));
+      } else {
+        next(err);
+      }
+    });
 };
 
 module.exports = {
