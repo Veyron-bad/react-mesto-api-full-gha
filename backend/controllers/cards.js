@@ -6,7 +6,7 @@ const ErrorNotFound = require('../errors/errorNotFound');
 const ErrorForbidden = require('../errors/errorForbidden');
 const ErrorBadRequest = require('../errors/errorBadRequest');
 
-const { ValidationError } = mongoose.Error;
+const { ValidationError, CastError } = mongoose.Error;
 
 const getCards = (req, res, next) => {
   Card.find({})
@@ -70,7 +70,13 @@ const likeCard = (req, res, next) => {
         throw new ErrorNotFound('Ошибка установки like');
       }
     })
-    .catch(next);
+    .catch((err) => {
+      if (err instanceof CastError) {
+        next(new ErrorNotFound('Карточка с несуществующим в БД id'));
+      } else {
+        next(err);
+      }
+    });
 };
 
 const dislikeCard = (req, res, next) => {
