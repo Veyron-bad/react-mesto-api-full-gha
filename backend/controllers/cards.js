@@ -82,7 +82,7 @@ const dislikeCard = (req, res, next) => {
       if (!card) {
         throw new ErrorNotFound('Карточка отсутствует');
       }
-      return Card.findByIdAndUpdate(cardId, { $pull: { likes: req.user._id } })
+      return Card.findByIdAndUpdate(cardId, { $pull: { likes: req.user._id } }, { new: true })
         .then((newCard) => newCard.populate(['owner', 'likes']))
         .then((newCard) => { res.send(newCard); });
     })
